@@ -1,0 +1,14 @@
+#import the data
+library(readr)
+cms_covid_20200903 <- read_csv("data/COVID19_Nursing_Home_Dataset.csv")
+
+#turn spaces into underscores
+library(stringr)
+names(cms_covid_20200903)<-str_replace_all(names(cms_covid_20200903), c(" " = "_", "-" = ""))
+
+#isolate Arkansas
+library(dplyr)
+ar_cms_covid_20200903 <- dplyr::filter(cms_covid_20200903, Provider_State == "AR")
+
+#export Arkansas for Kat
+write.csv(ar_cms_covid_20200903, "ar_cms_covid_20200903.csv")

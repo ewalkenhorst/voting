@@ -1,0 +1,618 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head id="j_idt32"><!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-61753334-1"></script>
+<script>
+  //<![CDATA[
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());  gtag('config', 'UA-61753334-1');
+
+  window.addEventListener("load", enableAnalyticsEventCapture, false);
+
+  function enableAnalyticsEventCapture() {
+    // Download button
+    $(document).on("click", ".btn-download, .btn-download.dropdown-toggle + ul.dropdown-menu li a", function() {
+      var category = stripSize($(this).text());
+      var label = getFileId($(this));
+      gtag('event', 'Download',{'event_category' : category,
+                                'event_label' : label});
+    });
+
+    // Request Access button
+    $(document).on("click", ".btn-request", function() {
+      var category = $(this).text();
+      var label = getFileId($(this));
+      gtag('event', 'Request Access', {'event_category' : category,
+                                     'event_label' : label});
+    });
+
+    // Explore button
+    $(document).on("click", ".btn-explore, .btn-explore.dropdown-toggle + ul.dropdown-menu li a", function() {
+      var category = $(this).text();
+      var label = getFileId($(this));
+      gtag('event', 'Explore', {'event_category' : category,
+                                'event_label' : label});
+    });
+
+    // Compute button
+    $(document).on("click", ".btn-compute, .btn-compute.dropdown-toggle + ul.dropdown-menu li a", function() {
+      var category = $(this).text();
+      var label = getFileId($(this));
+      gtag('event', 'Compute', {'event_category' : category,
+                                'event_label' : label});
+    });
+
+    // Preview button
+    $(document).on("click", ".btn-preview, .btn-preview.dropdown-toggle + ul.dropdown-menu li a", function() {
+      var category = $(this).text();
+      var label = getFileId($(this));
+      gtag('event', 'Preview', {'event_category' : category,
+                                'event_label' : label});
+    });
+
+    // Cite button
+    $(document).on("click", ".downloadCitation + ul.dropdown-menu li a", function() {
+      var category = $(this).text();
+      var label = 'Unknown';
+      if($('#fileForm').length > 0) {
+        label = stripId($('#fileForm').attr('action'));
+      } else if($('#datasetForm').length > 0) {
+        label = stripId($('#datasetForm').attr('action'));
+      }
+      gtag('event', 'Download Citation', {'event_category' : category,
+                                        'event_label' : label});
+    });
+
+    // Export Metadata button
+    $(document).on("click", ".btn-export + ul.dropdown-menu li a", function() {
+      var category = $(this).text();
+      var label = 'Unknown';
+      if($('#fileForm').length > 0) {
+        label = stripId($('#fileForm').attr('action'));
+      } else if($('#datasetForm').length > 0) {
+        label = stripId($('#datasetForm').attr('action'));
+      }
+      gtag('event', 'Export Metadata', {'event_category' : category,
+                                        'event_label' : label});
+    });
+
+    // Contact button
+    $(document).on("click", ".btn-contact", function() {
+      var category = $(this).text();
+      var label = 'Unknown';
+      if($('#fileForm').length > 0) {
+        label = stripId($('#fileForm').attr('action'));
+      } else if($('#datasetForm').length > 0) {
+        label = stripId($('#datasetForm').attr('action'));
+      } else if($('#dataverseForm').length > 0) {
+        label = stripAlias($('#dataverseForm').attr('action'));
+      }
+      gtag('event', 'Contact', {'event_category' : category,
+                                'event_label' : label});
+    });
+
+    // Share button
+    $(document).on("click", 'div[id$="shareDialog"] a[class^="sharrre"]', function() {
+      var sharrreVal = $(this).attr('class');
+      var category = sharrreVal.substring(sharrreVal.indexOf('-') + 1) ;
+      var label = 'Unknown';
+      if($('#fileForm').length > 0) {
+        label = stripId($('#fileForm').attr('action'));
+      } else if($('#datasetForm').length > 0) {
+        label = stripId($('#datasetForm').attr('action'));
+      } else if($('#dataverseForm').length > 0) {
+        label = stripAlias($('#dataverseForm').attr('action'));
+      }
+      gtag('event', 'Share', {'event_category' : category,
+                              'event_label' : label});
+    });
+  }
+
+  function getFileId(target) {
+    var label = 'Unknown';
+    if(target.parents('th, #actionButtonBlock .btn-access-dataset + ul.dropdown-menu').length>0) {
+      //Special case - the Download button that downloads all selected files in the dataset
+      label = 'file(s) from ' + stripId($('#datasetForm').attr('action'));
+    } else {
+      var row = target.parents('tr')[0];
+      if(row != null) {
+        //finds the file id/DOI in the Dataset page
+        label = $(row).find('div.file-metadata-block > a').attr('href');
+      } else {
+        //finds the file id/DOI in the file page
+        label = $('#fileForm').attr('action');
+      }
+      label = stripId(label);
+    }
+    return label;
+  }
+
+  function stripId(label) {
+    var index = label.indexOf('&');
+    if(index == -1) index = label.length;
+    if(label.indexOf('persistentId=') >= 0) {
+      label = label.substring(label.indexOf('persistentId=') + 13, index);
+    }
+    if(label.indexOf('fileId=') >= 0) {
+      label = label.substring(label.indexOf('fileId=') + 7, index);
+    }
+    return(label);
+  }
+
+  function stripAlias(label) {
+    var index = label.length;
+    label = label.substring(label.indexOf('/dataverse/') + 11, index).split(/[?#]/)[0];
+    return(label);
+  }
+
+  function stripSize(category) {
+    var index = category.indexOf('ZIP (');
+    if(index >= 0) {
+      category = category.substring(0, index + 3);
+    }
+    return(category);
+  }
+  //]]>
+</script>
+
+            <title>Elections Performance Index 2018 release</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="description" content="This dataverse contains all of the 2018 updates and reproduction files for the Elections Performance Index (EPI), as produced by the MIT Elections Data and Science Lab." /><link type="text/css" rel="stylesheet" href="/javax.faces.resource/theme.css.xhtml?ln=primefaces-bootstrap" /><script type="text/javascript" src="/javax.faces.resource/jquery/jquery.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?ln=primefaces&amp;v=8.0"></script><script type="text/javascript" src="/javax.faces.resource/jquery/jquery-plugins.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?ln=primefaces&amp;v=8.0"></script><script type="text/javascript" src="/javax.faces.resource/core.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?ln=primefaces&amp;v=8.0"></script><script type="text/javascript" src="/javax.faces.resource/components.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?ln=primefaces&amp;v=8.0"></script><link type="text/css" rel="stylesheet" href="/javax.faces.resource/components.css.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?ln=primefaces&amp;v=8.0" /><script type="text/javascript" src="/javax.faces.resource/jsf.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?ln=javax.faces"></script><script type="text/javascript" src="/javax.faces.resource/watermark/watermark.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?ln=primefaces&amp;v=8.0"></script><script type="text/javascript">if(window.PrimeFaces){PrimeFaces.settings.locale='en';}</script>
+        <link rel="apple-touch-icon" sizes="180x180" href="/javax.faces.resource/images/fav/apple-touch-icon.png.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/javax.faces.resource/images/fav/favicon-16x16.png.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/javax.faces.resource/images/fav/favicon-32x32.png.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406" />
+        <link rel="manifest" href="/javax.faces.resource/images/fav/site.webmanifest.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406" />
+        <link rel="mask-icon" href="/javax.faces.resource/images/fav/safari-pinned-tab.svg.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406" color="#da532c" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+        <link type="image/png" rel="image_src" href="/javax.faces.resource/images/dataverseproject.png.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/bs/css/bootstrap.min.css.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/bs/css/bootstrap-theme.min.css.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/ie-compat.css.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/owl.carousel.css.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/fontcustom.css.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/socicon.css.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/structure.css.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1" />
+            <script>
+                // Break out of iframe
+                if (window !== top) top.location = window.location;
+            </script>
+            <style>
+                /* Custom CSS */
+                #navbarFixed div.navbar-header img.navbar-brand.custom-logo {height:50px !important;}
+#dataverseDesc span > span > span > h3 {font-weight: 300 !important;}
+
+nav.navbar.navbar-default {background: #ececec !important;}
+/* #footer {background: #ececec !important; padding-top:1.25em;} */
+
+            </style></head><body>
+	<a href="#content" class="sr-only">Skip to main content</a>
+
+    <div id="dataverse-header-block"><nav id="navbarFixed" class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar" aria-pressed="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/"><img src="/logos/navbar/logo.png;jsessionid=8d440afad41ceb1c6e8f5372a406" alt="Harvard Dataverse homepage" class="navbar-brand custom-logo" />
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="topNavBar">
+                    <ul class="nav navbar-nav navbar-right"><li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add Data <b class="caret"></b></a>
+                            <ul class="dropdown-menu"><li><a href="/dataverse.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?ownerId=1">New Dataverse</a></li><li><a href="/dataset.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?ownerId=1">New Dataset</a></li>
+                            </ul></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search <b class="caret"></b></a>
+                            <ul class="dropdown-menu navbar-search">
+                                <form class="form-inline" role="search">
+                                    <label id="searchNavLabel" class="sr-only" for="navbarsearch">Search</label>
+                                    <div class="input-group">
+                                        <input id="navbarsearch" type="text" class="form-control" size="28" value="" placeholder="Search all dataverses..." aria-labelledby="searchNavLabel" />
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-default" onclick="window.location='/dataverse/harvard?q=' + document.getElementById('navbarsearch').value;return false;">
+                                                <span class="glyphicon glyphicon-search"></span> Find
+                                            </button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </ul>
+                        </li><li><a href="https://support.dataverse.harvard.edu/" rel="noopener" target="_blank">About</a></li>
+                        <li><a href="http://guides.dataverse.org/en/5.1.1/user" rel="noopener" target="_blank">User Guide</a>
+                        </li>
+<form id="j_idt76" name="j_idt76" method="post" action="/dataverse.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406" class="navbar-form navbar-left navbar-form-link">
+<input type="hidden" name="j_idt76" value="j_idt76" />
+<a id="j_idt76:headerSupportLink" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;j_idt76:headerSupportLink&quot;,f:&quot;j_idt76&quot;,u:&quot;contactDialog&quot;,onco:function(xhr,status,args,data){PF('contactForm').show();}});return false;">Support</a><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:0" value="-5888976436540203970:-2421934833401248349" autocomplete="off" />
+</form>
+                            <li><a href="/dataverseuser.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?editMode=CREATE&amp;redirectPage=%2Fdataverse.xhtml%3Falias%3Depi2018">
+                                    Sign Up
+                                </a>
+                            </li>
+                            <li><a href="/loginpage.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?redirectPage=%2Fdataverse.xhtml%3Falias%3Depi2018">
+                                    Log In
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div></nav>
+        
+        <noscript>
+            <div id="noscript-alert" class="bg-danger">
+                <div class="alert container text-danger no-margin-bottom">Please enable JavaScript in your browser. It is required to use most of the features of Dataverse.
+                </div>
+            </div>
+        </noscript>
+<form id="j_idt129" name="j_idt129" method="post" action="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406" class="form-inline">
+<input type="hidden" name="j_idt129" value="j_idt129" />
+<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:1" value="-5888976436540203970:-2421934833401248349" autocomplete="off" />
+</form><div style="background:#FFFFFF;" id="dataverseHeader" class="container bg-muted">
+            <div class="dataverseHeaderBlock"><div class="dataverseHeaderCell dataverseHeaderName">
+                    <a href="/dataverse/epi2018" class="dataverseHeaderDataverseName" style="color:#428bca;">Elections Performance Index 2018 release</a><span style="color:#888888;"> (Massachusetts Institute of Technology)</span></div>
+            </div></div><div id="breadCrumbPanel"><div id="breadcrumbNavBlock" class="container">
+                <div class="breadcrumbBlock">
+                            <a id="breadcrumbLnk0" href="/dataverse/harvard">Harvard Dataverse
+                            </a>
+                </div><span class="breadcrumbCarrot"> &gt; </span>
+                <div class="breadcrumbBlock">
+                            <a id="breadcrumbLnk1" href="/dataverse/medsl">MEDSL Dataverse
+                            </a>
+                </div><span class="breadcrumbCarrot"> &gt; </span>
+                <div class="breadcrumbBlock">
+                </div></div></div><div id="messagePanel">
+            <div class="container messagePanel">
+            </div></div>
+    </div>
+        <div class="container" id="content">
+<form id="dataverseForm" name="dataverseForm" method="post" action="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="dataverseForm" value="dataverseForm" />
+<div id="actionButtonBlock" class="col-xs-12 button-block margin-bottom">
+                            <div class="row">
+                                
+                                
+                                <div class="col-xs-12 text-right padding-none">
+                                    
+                                    <div class="btn-group" role="group"><a id="dataverseForm:j_idt339" href="#" class="ui-commandlink ui-widget text-button btn-contact bootstrap-button-tooltip" aria-label="Email Dataverse Contact" onclick="PrimeFaces.ab({s:&quot;dataverseForm:j_idt339&quot;,f:&quot;dataverseForm&quot;,u:&quot;contactDialog&quot;,onco:function(xhr,status,args,data){PF('contactForm').show();},pa:[{name:&quot;DO_VALIDATION&quot;,value:&quot;false&quot;}]});return false;" title="Email Dataverse Contact" type="button">
+                                                <span class="glyphicon glyphicon-envelope"></span> Contact
+                                        </a><a id="dataverseForm:j_idt342" href="#" class="ui-commandlink ui-widget text-button btn-share bootstrap-button-tooltip" aria-label="Share Dataverse" onclick="PrimeFaces.ab({s:&quot;dataverseForm:j_idt342&quot;,f:&quot;dataverseForm&quot;,onco:function(xhr,status,args,data){PF('shareDialog').show();sharrre();;}});return false;" title="Share Dataverse" type="button">
+                                            <span class="glyphicon glyphicon-share"></span> Share
+                                        </a>
+                                    </div>
+                                    
+                                </div>
+                            </div></div><div class="row margin-bottom">
+                                <div id="dataverseDesc" class="col-xs-12">This dataverse contains all of the 2018 updates and reproduction files for the Elections Performance Index (EPI), as produced by the MIT Elections Data and Science Lab.
+                                </div></div><div id="dataverseForm:browseOptsForm" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="dataverseForm:browseOptsForm_title" class="ui-dialog-title">Featured Dataverses</span><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Close"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="dataverseForm:browseOptsForm_content">
+                            <p class="text-danger">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span> In order to use this feature you must have at least one published dataverse.
+                            </p>
+                            <div class="button-block">
+                                <button class="btn btn-default" onclick="PF('browseOptsForm').hide();" type="button">                              
+                                    Close
+                                </button>
+                            </div></div></div><script id="dataverseForm:browseOptsForm_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","browseOptsForm",{id:"dataverseForm:browseOptsForm",modal:true});});</script><div id="dataverseForm:publishDvConfirm" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="dataverseForm:publishDvConfirm_title" class="ui-dialog-title">Publish Dataverse</span><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Close"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="dataverseForm:publishDvConfirm_content">
+                        <p class="text-warning">
+                            <span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to publish your dataverse? Once you do so it must remain published.
+                        </p>
+                        <div class="button-block"><button id="dataverseForm:j_idt420" name="dataverseForm:j_idt420" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btn btn-default" onclick="PrimeFaces.bcn(this,event,[function(event){PF('confirmation').hide()},function(event){PrimeFaces.ab({s:&quot;dataverseForm:j_idt420&quot;,f:&quot;dataverseForm&quot;});return false;}]);" type="submit"><span class="ui-button-text ui-c">Continue</span></button><script id="dataverseForm:j_idt420_s" type="text/javascript">$(function(){PrimeFaces.cw("CommandButton","widget_dataverseForm_j_idt420",{id:"dataverseForm:j_idt420"});});</script>
+                            <button class="btn btn-link" onclick="PF('confirmation').hide();" type="button">                              
+                                Cancel
+                            </button>
+                        </div></div></div><script id="dataverseForm:publishDvConfirm_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","confirmation",{id:"dataverseForm:publishDvConfirm",modal:true});});</script><div id="dataverseForm:mayNotRelease" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="dataverseForm:mayNotRelease_title" class="ui-dialog-title">Publish Dataverse</span><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Close"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="dataverseForm:mayNotRelease_content">
+                        <p class="text-danger">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span> This dataverse cannot be published because the dataverse it is in has not been published.
+                        </p>
+                        <div class="button-block">
+                            <button class="btn btn-default" onclick="PF('mayNotRelease').hide();" type="button">                              
+                                Close
+                            </button>
+                        </div></div></div><script id="dataverseForm:mayNotRelease_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","mayNotRelease",{id:"dataverseForm:mayNotRelease",modal:true});});</script><div id="dataverseForm:deleteDvConfirm" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="dataverseForm:deleteDvConfirm_title" class="ui-dialog-title">Delete Dataverse</span><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Close"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="dataverseForm:deleteDvConfirm_content">
+                        <p class="text-warning">
+                            <span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete your dataverse? You cannot undelete this dataverse.
+                        </p>
+                        <div class="button-block"><button id="dataverseForm:j_idt424" name="dataverseForm:j_idt424" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btn btn-default" onclick="PrimeFaces.bcn(this,event,[function(event){PF('deleteConfirmation').hide()},function(event){PrimeFaces.ab({s:&quot;dataverseForm:j_idt424&quot;,f:&quot;dataverseForm&quot;});return false;}]);" type="submit"><span class="ui-button-text ui-c">Continue</span></button><script id="dataverseForm:j_idt424_s" type="text/javascript">$(function(){PrimeFaces.cw("CommandButton","widget_dataverseForm_j_idt424",{id:"dataverseForm:j_idt424"});});</script>
+                            <button class="btn btn-link" onclick="PF('deleteConfirmation').hide();" type="button">                              
+                                Cancel
+                            </button>
+                        </div></div></div><script id="dataverseForm:deleteDvConfirm_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","deleteConfirmation",{id:"dataverseForm:deleteDvConfirm",modal:true});});</script><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:2" value="-5888976436540203970:-2421934833401248349" autocomplete="off" />
+</form><div id="searchResults"><div class="row panelSearchForm">
+        <div class="col-sm-9">
+<form id="j_idt429" name="j_idt429" method="post" action="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406" class="form-inline" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt429" value="j_idt429" />
+
+                <div class="form-group">
+                    <label class="sr-only" for="searchBasic">Search</label>
+                    <div class="input-group"><input id="j_idt429:searchBasic" name="j_idt429:searchBasic" type="text" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control search-input" size="35" title="Search" onkeypress="if (event.keyCode == 13) { submitsearch(); return false; }" /><script id="j_idt429:searchBasic_s" type="text/javascript">$(function(){PrimeFaces.cw("InputText","widget_j_idt429_searchBasic",{id:"j_idt429:searchBasic",maxlength:-2147483648});});</script><script id="j_idt429:j_idt431_s" type="text/javascript">$(function(){PrimeFaces.cw("Watermark","widget_j_idt429_j_idt431",{id:"j_idt429:j_idt431",value:"Search this dataverse...",target:"j_idt429:searchBasic"});});</script>
+
+                        <span class="input-group-btn"><a id="j_idt429:searchbutton" href="#" class="ui-commandlink ui-widget btn btn-default" onclick="PrimeFaces.ab({s:&quot;j_idt429:searchbutton&quot;,f:&quot;j_idt429&quot;,fi:&quot;searchResults&quot;});return false;">
+                                <span class="glyphicon glyphicon-search"></span> Find
+                            </a>
+                        </span><script id="j_idt429:j_idt435" type="text/javascript">submitsearch = function() {PrimeFaces.ab({s:"j_idt429:j_idt435",f:"j_idt429",pa:arguments[0],fi:"searchResults"});}</script>
+                    </div><a id="j_idt429:advsearchlink" name="j_idt429:advsearchlink" href="/dataverse/epi2018/search;jsessionid=8d440afad41ceb1c6e8f5372a406">Advanced Search</a>
+                </div><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:3" value="-5888976436540203970:-2421934833401248349" autocomplete="off" />
+</form>
+        </div><div class="col-sm-3 text-right col-manage-action">
+            <div class="button-block">
+            </div></div></div><div id="search-row-panel" class="row row-offcanvas row-offcanvas-left">
+        <div id="dv-sidebar" class="col-sm-4 col-md-3 sidebar-offcanvas">
+<form id="facetType" name="facetType" method="post" action="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="facetType" value="facetType" />
+
+                
+                <div class="clearfix"><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;types=datasets&amp;sort=dateSort&amp;order=desc&amp;page=1" class="facetTypeChBox facetLink facetSelected"><div id="facetType:j_idt468" class="ui-selectbooleancheckbox ui-chkbox ui-widget"><div class="ui-helper-hidden-accessible"><input id="facetType:j_idt468_input" name="facetType:j_idt468_input" type="checkbox" autocomplete="off" checked="checked" aria-checked="true" /></div><div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default ui-state-active"><span class="ui-chkbox-icon ui-icon ui-icon-check ui-c"></span></div></div><script id="facetType:j_idt468_s" type="text/javascript">$(function(){PrimeFaces.cw("SelectBooleanCheckbox","widget_facetType_j_idt468",{id:"facetType:j_idt468"});});</script></a><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;types=dataverses&amp;sort=dateSort&amp;order=desc&amp;page=1" class="facetTypeLink chkbox-label-margin facetSelected">
+
+                        <span class="icon-dataverse text-icon-inline"></span><span class="facetTypeDataverse">Dataverses (0)</span></a>
+                </div>
+                
+                <div class="clearfix"><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;types=dataverses&amp;sort=dateSort&amp;order=desc&amp;page=1" class="facetTypeChBox facetLink facetSelected"><div id="facetType:j_idt485" class="ui-selectbooleancheckbox ui-chkbox ui-widget"><div class="ui-helper-hidden-accessible"><input id="facetType:j_idt485_input" name="facetType:j_idt485_input" type="checkbox" autocomplete="off" checked="checked" aria-checked="true" /></div><div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default ui-state-active"><span class="ui-chkbox-icon ui-icon ui-icon-check ui-c"></span></div></div><script id="facetType:j_idt485_s" type="text/javascript">$(function(){PrimeFaces.cw("SelectBooleanCheckbox","widget_facetType_j_idt485",{id:"facetType:j_idt485"});});</script></a><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;types=datasets&amp;sort=dateSort&amp;order=desc&amp;page=1" class="facetTypeLink chkbox-label-margin facetSelected">
+
+                        <span class="icon-dataset text-icon-inline"></span><span class="facetTypeDataset">Datasets (1)</span></a>
+                </div>
+                
+                <div class="clearfix"><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;types=dataverses%3Adatasets%3Afiles&amp;sort=dateSort&amp;order=desc&amp;page=1" class="facetTypeChBox facetLink "><div id="facetType:j_idt502" class="ui-selectbooleancheckbox ui-chkbox ui-widget"><div class="ui-helper-hidden-accessible"><input id="facetType:j_idt502_input" name="facetType:j_idt502_input" type="checkbox" autocomplete="off" aria-checked="false" /></div><div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default"><span class="ui-chkbox-icon ui-icon ui-icon-blank ui-c"></span></div></div><script id="facetType:j_idt502_s" type="text/javascript">$(function(){PrimeFaces.cw("SelectBooleanCheckbox","widget_facetType_j_idt502",{id:"facetType:j_idt502"});});</script></a><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;types=files&amp;sort=dateSort&amp;order=desc&amp;page=1" class="facetTypeLink chkbox-label-margin ">
+
+                        <span class="icon-file text-icon-inline"></span><span class="facetTypeFile">Files (7)</span></a>
+                </div><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:4" value="-5888976436540203970:-2421934833401248349" autocomplete="off" />
+</form>
+<form id="facetCategoryForm" name="facetCategoryForm" method="post" action="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="facetCategoryForm" value="facetCategoryForm" />
+<div id="facetCategoryForm:facetCategoryList" class="ui-datalist ui-widget"><div id="facetCategoryForm:facetCategoryList_content" class="ui-datalist-content ui-widget-content"><ul id="facetCategoryForm:facetCategoryList_list" class="ui-datalist-data"><li class="ui-datalist-item"><span class="facetCategoryName">Publication Year</span><div id="facetCategoryForm:facetCategoryList:0:j_idt514" class="ui-datalist ui-widget"><div id="facetCategoryForm:facetCategoryList:0:j_idt514_content" class="ui-datalist-content ui-widget-content"><ul id="facetCategoryForm:facetCategoryList:0:j_idt514_list" class="ui-datalist-data"><li class="ui-datalist-item"><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;fq2=publicationDate%3A%222020%22&amp;fq0=subtreePaths%3A%22%2F3031939%2F4030635%22&amp;fq1=dvObjectType%3A%28dataverses+OR+datasets%29&amp;types=dataverses%3Adatasets&amp;sort=dateSort&amp;order=" class="facetLink">2020 (1)</a></li></ul></div></div><script id="facetCategoryForm:facetCategoryList:0:j_idt514_s" type="text/javascript">$(function(){PrimeFaces.cw("DataList","widget_facetCategoryForm_facetCategoryList_0_j_idt514",{id:"facetCategoryForm:facetCategoryList:0:j_idt514"});});</script></li><li class="ui-datalist-item"><span class="facetCategoryName">Subject</span><div id="facetCategoryForm:facetCategoryList:1:j_idt514" class="ui-datalist ui-widget"><div id="facetCategoryForm:facetCategoryList:1:j_idt514_content" class="ui-datalist-content ui-widget-content"><ul id="facetCategoryForm:facetCategoryList:1:j_idt514_list" class="ui-datalist-data"><li class="ui-datalist-item"><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;fq2=subject_ss%3A%22Law%22&amp;fq0=subtreePaths%3A%22%2F3031939%2F4030635%22&amp;fq1=dvObjectType%3A%28dataverses+OR+datasets%29&amp;types=dataverses%3Adatasets&amp;sort=dateSort&amp;order=" class="facetLink">Law (1)</a></li><li class="ui-datalist-item"><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;fq2=subject_ss%3A%22Other%22&amp;fq0=subtreePaths%3A%22%2F3031939%2F4030635%22&amp;fq1=dvObjectType%3A%28dataverses+OR+datasets%29&amp;types=dataverses%3Adatasets&amp;sort=dateSort&amp;order=" class="facetLink">Other (1)</a></li><li class="ui-datalist-item"><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;fq2=subject_ss%3A%22Social+Sciences%22&amp;fq0=subtreePaths%3A%22%2F3031939%2F4030635%22&amp;fq1=dvObjectType%3A%28dataverses+OR+datasets%29&amp;types=dataverses%3Adatasets&amp;sort=dateSort&amp;order=" class="facetLink">Social Sciences (1)</a></li></ul></div></div><script id="facetCategoryForm:facetCategoryList:1:j_idt514_s" type="text/javascript">$(function(){PrimeFaces.cw("DataList","widget_facetCategoryForm_facetCategoryList_1_j_idt514",{id:"facetCategoryForm:facetCategoryList:1:j_idt514"});});</script></li><li class="ui-datalist-item"><span class="facetCategoryName">Author Name</span><div id="facetCategoryForm:facetCategoryList:2:j_idt514" class="ui-datalist ui-widget"><div id="facetCategoryForm:facetCategoryList:2:j_idt514_content" class="ui-datalist-content ui-widget-content"><ul id="facetCategoryForm:facetCategoryList:2:j_idt514_list" class="ui-datalist-data"><li class="ui-datalist-item"><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;fq2=authorName_ss%3A%22Curiel%2C+John%22&amp;fq0=subtreePaths%3A%22%2F3031939%2F4030635%22&amp;fq1=dvObjectType%3A%28dataverses+OR+datasets%29&amp;types=dataverses%3Adatasets&amp;sort=dateSort&amp;order=" class="facetLink">Curiel, John (1)</a></li></ul></div></div><script id="facetCategoryForm:facetCategoryList:2:j_idt514_s" type="text/javascript">$(function(){PrimeFaces.cw("DataList","widget_facetCategoryForm_facetCategoryList_2_j_idt514",{id:"facetCategoryForm:facetCategoryList:2:j_idt514"});});</script></li><li class="ui-datalist-item"><span class="facetCategoryName">Author Affiliation</span><div id="facetCategoryForm:facetCategoryList:3:j_idt514" class="ui-datalist ui-widget"><div id="facetCategoryForm:facetCategoryList:3:j_idt514_content" class="ui-datalist-content ui-widget-content"><ul id="facetCategoryForm:facetCategoryList:3:j_idt514_list" class="ui-datalist-data"><li class="ui-datalist-item"><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;fq2=authorAffiliation_ss%3A%22Massachusetts+Institute+of+Technology%22&amp;fq0=subtreePaths%3A%22%2F3031939%2F4030635%22&amp;fq1=dvObjectType%3A%28dataverses+OR+datasets%29&amp;types=dataverses%3Adatasets&amp;sort=dateSort&amp;order=" class="facetLink">Massachusetts Institute of Technology (1)</a></li></ul></div></div><script id="facetCategoryForm:facetCategoryList:3:j_idt514_s" type="text/javascript">$(function(){PrimeFaces.cw("DataList","widget_facetCategoryForm_facetCategoryList_3_j_idt514",{id:"facetCategoryForm:facetCategoryList:3:j_idt514"});});</script></li></ul></div></div><script id="facetCategoryForm:facetCategoryList_s" type="text/javascript">$(function(){PrimeFaces.cw("DataList","widget_facetCategoryForm_facetCategoryList",{id:"facetCategoryForm:facetCategoryList"});});</script><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:5" value="-5888976436540203970:-2421934833401248349" autocomplete="off" />
+</form>
+        </div>
+        <div id="dv-main" class="col-sm-8 col-md-9">
+            
+
+            
+            <p class="visible-xs-block">
+              <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><span class="glyphicon glyphicon-chevron-left"></span> Filter Results</button>
+            </p><div id="resultsCountPaginatorBlock" class="row">
+                
+                <div class="results-count col-xs-6">1 to 1 of 1 Result
+                </div>
+                
+                <div class="results-sort-pagination col-xs-6">
+                    
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-sort"></span> Sort <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right text-left" role="menu">
+                            <li><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;types=dataverses%3Adatasets&amp;page=1&amp;sort=nameSort&amp;order=asc"><span class="">Name (A-Z)</span></a>
+                            </li>
+                            <li><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;types=dataverses%3Adatasets&amp;page=1&amp;sort=nameSort&amp;order=desc"><span class="">Name (Z-A)</span></a>
+                            </li>
+                            <li><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;types=dataverses%3Adatasets&amp;page=1&amp;sort=dateSort&amp;order=desc"><span class="highlightBold">Newest</span></a>
+                            </li>
+                            <li><a href="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406?q=&amp;types=dataverses%3Adatasets&amp;page=1&amp;sort=dateSort&amp;order=asc"><span class="">Oldest</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div></div><table id="resultsTable" class="">
+<tbody>
+<tr>
+<td><div class="datasetResult clearfix">
+                        <div class="card-title-icon-block">
+                            <span class="icon-dataset text-info pull-right" title="Dataset"></span>
+                            <a href="/dataset.xhtml?persistentId=doi:10.7910/DVN/9UF1ZM"><span style="padding:4px 0;">Replication Data for the Elections Performance Index and supporting files</span></a>
+                        </div>
+                        <div class="card-preview-icon-block text-center">
+                            <a href="/dataset.xhtml?persistentId=doi:10.7910/DVN/9UF1ZM"><span class="icon-dataset"></span>
+                            </a>
+                        </div><span class="text-muted">Aug 20, 2020</span>
+
+                        <div class="resultDatasetCitationBlock alert alert-info bg-citation">Curiel, John, 2020, "Replication Data for the Elections Performance Index and supporting files", <a href="https://doi.org/10.7910/DVN/9UF1ZM" target="_blank">https://doi.org/10.7910/DVN/9UF1ZM</a>, Harvard Dataverse, V1, UNF:6:uvVzV67o32L9QaBX3dMRNg== [fileUNF]
+                        </div>The data and updates for the 2018 release of the Elections Performance Index.</div></td>
+</tr>
+</tbody>
+</table>
+
+        </div></div>
+<form id="j_idt841" name="j_idt841" method="post" action="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt841" value="j_idt841" />
+<script id="j_idt841:j_idt842" type="text/javascript">postLoad = function() {PrimeFaces.ab({s:"j_idt841:j_idt842",f:"j_idt841",p:"j_idt841:j_idt842",u:"resultsTable",pa:arguments[0],fi:"searchResults"});}</script><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:6" value="-5888976436540203970:-2421934833401248349" autocomplete="off" />
+</form><div id="addDataGuest" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="addDataGuest_title" class="ui-dialog-title">Add Data</span><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Close"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="addDataGuest_content">
+        <p class="help-block">Sign up or log in to create a dataverse or add a dataset.
+        </p>
+        <div class="button-block">
+                <a class="btn btn-default" href="/dataverseuser.xhtml?editMode=CREATE&amp;redirectPage=%2Fdataverse.xhtml%3Falias%3Depi2018" title="Sign Up for a Dataverse Account">Sign Up</a>
+            <a class="btn btn-default" href="/loginpage.xhtml?redirectPage=%2Fdataverse.xhtml%3Falias%3Depi2018" title="Log into your Dataverse Account">Log In</a>
+        </div></div></div><script id="addDataGuest_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","addData_popup",{id:"addDataGuest",modal:true});});</script></div><div id="shareDialog" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="shareDialog_title" class="ui-dialog-title">Share Dataverse</span><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Close"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="shareDialog_content">
+<form id="j_idt849" name="j_idt849" method="post" action="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406" class="form-horizontal" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt849" value="j_idt849" />
+ 
+                    <p class="help-block">Share this dataverse on your favorite social media networks.</p>
+                    <div id="sharrre-widget" data-url="https://dataverse.harvard.edu/dataverse/epi2018" data-text="View this dataverse."></div>
+                    <div class="button-block">
+                        <button class="btn btn-default" onclick="PF('shareDialog').hide()" type="button">
+                            Close
+                        </button>
+                    </div><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:7" value="-5888976436540203970:-2421934833401248349" autocomplete="off" />
+</form></div></div><script id="shareDialog_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","shareDialog",{id:"shareDialog",modal:true});});</script><div id="linkDataverseForm" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="linkDataverseForm_title" class="ui-dialog-title">Link Dataverse</span><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Close"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="linkDataverseForm_content">
+<form id="j_idt851" name="j_idt851" method="post" action="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406" class="form-horizontal" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt851" value="j_idt851" />
+<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:8" value="-5888976436540203970:-2421934833401248349" autocomplete="off" />
+</form></div></div><script id="linkDataverseForm_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","linkDataverseForm",{id:"linkDataverseForm",modal:true});});</script><div id="resetModifications" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="resetModifications_title" class="ui-dialog-title">Reset Modifications</span></div><div class="ui-dialog-content ui-widget-content" id="resetModifications_content">
+<form id="j_idt887" name="j_idt887" method="post" action="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406" class="form-horizontal" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt887" value="j_idt887" />
+
+                    <p class="text-warning">
+                        <span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to reset the selected metadata fields? If you do this, any customizations (hidden, required, optional) you have done will no longer appear.
+                    </p>
+                    <div class="button-block"><button id="j_idt887:j_idt889" name="j_idt887:j_idt889" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btn btn-default" onclick="PrimeFaces.bcn(this,event,[function(event){check();PF('resetModifications').hide()},function(event){PrimeFaces.ab({s:&quot;j_idt887:j_idt889&quot;,f:&quot;j_idt887&quot;});return false;}]);" type="submit"><span class="ui-button-text ui-c">Continue</span></button><script id="j_idt887:j_idt889_s" type="text/javascript">$(function(){PrimeFaces.cw("CommandButton","widget_j_idt887_j_idt889",{id:"j_idt887:j_idt889"});});</script>
+                        <button class="btn btn-link" onclick="uncheck();PF('resetModifications').hide()" type="button">                              
+                            Cancel
+                        </button>
+                    </div><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:9" value="-5888976436540203970:-2421934833401248349" autocomplete="off" />
+</form></div></div><script id="resetModifications_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","resetModifications",{id:"resetModifications",modal:true});});</script>
+                <script>
+                    //<![CDATA[
+                    var scrollPos=0;
+                    $(document).ready(function () {
+                        initCarousel();
+                        popoverHTML('Allowed HTML Tags','&lt;a&gt;, &lt;b&gt;, &lt;blockquote&gt;, &lt;br&gt;, &lt;code&gt;, &lt;del&gt;, &lt;dd&gt;, &lt;dl&gt;, &lt;dt&gt;, &lt;em&gt;, &lt;hr&gt;, &lt;h1&gt;-&lt;h3&gt;, &lt;i&gt;, &lt;img&gt;, &lt;kbd&gt;, &lt;li&gt;, &lt;ol&gt;, &lt;p&gt;, &lt;pre&gt;, &lt;s&gt;, &lt;sup&gt;, &lt;sub&gt;, &lt;strong&gt;, &lt;strike&gt;, &lt;u&gt;, &lt;ul&gt;');
+                    });
+                    function initCarousel() {
+                        var owl1 = $("#featuredDataversesList");
+                        owl1.owlCarousel({
+                            pagination: false,
+                            navigation: false,
+                            items: 4, //10 items above 1000px browser width
+                            itemsDesktop: [1140, 4], //5 items between 1000px and 901px
+                            itemsDesktopSmall: [940, 3], // betweem 900px and 601px
+                            itemsTablet: [720, 2], //2 items between 600 and 0
+                            itemsMobile: false // itemsMobile disabled - inherit from itemsTablet option
+                        });
+                        if (owl1.find('div.owl-item').length > 4) {
+                            // Custom Navigation Events
+                            $(".next1").click(function () {
+                                owl1.trigger('owl.next');
+                            });
+                            $(".prev1").click(function () {
+                                owl1.trigger('owl.prev');
+                            });
+                        } else {
+                            $("#featuredDataversesBlock .customNavigation a.btn").hide();
+                        }
+                        $('#featuredDataversesList .item').matchHeight();
+                    }
+                    function callOnError(){
+                        window.scrollTo(0, 0);
+                    }
+                    function updateInclude() {
+                        $('button[id$="hiddenRefresh"]').trigger('click');
+                    }
+                    function scrollAfterUpdate() {
+                        document.getElementById('metadataFieldOptionsPanel-Body').scrollTop = scrollPos;
+                    }
+                    
+                    function updateMetadata(checkbox) {
+                        var checked = checkbox.checked;
+                        if (checked === false){
+                            $('button[id$="updateMetadataButton"]').trigger('click');
+                        } else {
+                            PF('resetModifications').show();
+                        }
+                    }
+                    function check() {
+                        $('button[id$="resetToInherit"]').trigger('click');
+                    }
+                    function uncheck() {
+                        $('input:checkbox[id$="metadataRoot"]').prop('checked', false);
+                    }
+                    function updateOwnerDataverse() {
+                        $('button[id$="updateOwnerDataverse"]').trigger('click');
+                    }
+                    //]]>                                     
+                </script>
+        </div>
+    <div id="footer">
+        <div class="container">
+            <div class="row"><div class="col-sm-8 small">
+                    <p>Copyright &#169; 2020, The President &#38; Fellows of Harvard College |  <a href="http://best-practices.dataverse.org/harvard-policies/harvard-privacy-policy.html" rel="noopener" target="_blank">Privacy Policy</a>
+                    </p></div>
+                <div class="col-sm-4 text-right">
+                    <div class="poweredbylogo">
+                        <span>Powered by</span>
+                        <a href="http://dataverse.org/" title="The Dataverse Project" target="_blank" rel="noopener"><img src="/resources/images/dataverse_project_logo.svg" width="118" height="40" onerror="this.src='/resources/images/dataverseproject_logo.png'" alt="The Dataverse Project logo" /></a><span class="version">v. 5.1.1 build 221-1b59dac</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><script>
+  //<![CDATA[
+  $(document).ready(function () {
+    $("#footer > div.container > div.row > div.col-sm-8.small > p").append("&#160;|&#160; <a href=\"https://www.harvard.edu/copyright-issue\" target=\"_blank\" rel=\"noopener\">Report Copyright Infringement</a> &#160;|&#160; <a href=\"https://accessibility.huit.harvard.edu/digital-accessibility-policy\" target=\"_blank\" rel=\"noopener\">Accessibility</a>");
+  });
+  //]]>
+</script>
+
+<style>
+#feedbackTab {position:fixed; bottom:0; right:50px;}
+#feedbackTab a.btn-feedback {border-bottom-right-radius:0; border-bottom-left-radius:0;}
+.btn-feedback {background-color:#C55B28; border-color:#C55B28; color:#fff;}
+.btn-feedback:hover, .btn-feedback:focus,
+.btn-feedback:active, .btn-feedback.active {background-color:#b05124; border-color: #9b471f; color:#fff;}
+</style>
+
+<div id="feedbackTab">
+    <a class="btn btn-feedback bootstrap-button-tooltip" href="https://goo.gl/forms/p7uu3GfiWYSlJrsi1" role="button" target="_blank" rel="noopener"  aria-label="Help improve Dataverse!" data-original-title="Help improve Dataverse!">
+        Feedback
+    </a>
+</div>
+<div id="ajaxStatusPanel"><div id="ajaxStatusPanel_start" style="display:none"><img src="/resources/images/ajax-loading.gif;jsessionid=8d440afad41ceb1c6e8f5372a406" alt="Loading..." /></div></div><script id="ajaxStatusPanel_s" type="text/javascript">$(function(){PrimeFaces.cw("AjaxStatus","widget_ajaxStatusPanel",{id:"ajaxStatusPanel",delay:0});});</script><div id="contactDialog" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="contactDialog_title" class="ui-dialog-title">Contact Harvard Dataverse Support</span><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Close"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="contactDialog_content"><div id="j_idt918">
+<form id="emailForm" name="emailForm" method="post" action="/dataverse/epi2018;jsessionid=8d440afad41ceb1c6e8f5372a406" class="form-horizontal" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="emailForm" value="emailForm" />
+<span id="emailForm:j_idt919"></span><script type="text/javascript">$(function(){PrimeFaces.focus(null, 'contactDialog');});</script>
+                
+                <div class="form-group">
+                    <label for="messageTo" class="col-sm-3 control-label">To</label>
+                    <div class="col-sm-9">
+                        <p id="messageTo" class="form-control-static">Harvard Dataverse Support</p>
+                    </div>
+                </div>
+                
+                    <div class="form-group"><label for="emailForm:userEmail" class="col-sm-3 control-label">From <span class="glyphicon glyphicon-asterisk text-danger" title="Required field"></span></label>
+                        <div class="col-sm-9"><input id="emailForm:userEmail" name="emailForm:userEmail" type="text" value="" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control" size="30" /><script id="emailForm:userEmail_s" type="text/javascript">$(function(){PrimeFaces.cw("InputText","widget_emailForm_userEmail",{id:"emailForm:userEmail",maxlength:-2147483648});});</script>
+                        </div>
+                    </div>
+                
+                <div class="form-group"><label for="emailForm:messageSubject" class="col-sm-3 control-label">Subject <span class="glyphicon glyphicon-asterisk text-danger" title="Required field"></span></label>
+                    <div class="col-sm-9"><input id="emailForm:messageSubject" name="emailForm:messageSubject" type="text" value="" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control" /><script id="emailForm:messageSubject_s" type="text/javascript">$(function(){PrimeFaces.cw("InputText","widget_emailForm_messageSubject",{id:"emailForm:messageSubject",maxlength:-2147483648});});</script>
+                    </div>
+                </div>   
+                
+                <div class="form-group"><label for="emailForm:userMessage" class="col-sm-3 control-label">Message <span class="glyphicon glyphicon-asterisk text-danger" title="Required field"></span></label>
+                    <div class="col-sm-9"><textarea id="emailForm:userMessage" name="emailForm:userMessage" class="ui-inputfield ui-inputtextarea ui-widget ui-state-default ui-corner-all form-control" cols="20" rows="10" title="Message" maxlength="2147483647"></textarea><script id="emailForm:userMessage_s" type="text/javascript">$(function(){PrimeFaces.cw("InputTextarea","widget_emailForm_userMessage",{id:"emailForm:userMessage",autoResize:false});});</script>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <p><span class="highlightBold">Please fill this out to prove you are not a robot.</span> <span class="glyphicon glyphicon-asterisk text-danger" title="Required field"></span>
+                        </p> +  = <input id="emailForm:messageSum" name="emailForm:messageSum" type="text" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all" size="4" /><script id="emailForm:messageSum_s" type="text/javascript">$(function(){PrimeFaces.cw("InputText","widget_emailForm_messageSum",{id:"emailForm:messageSum",maxlength:-2147483648});});</script>
+                    </div>
+                </div>
+                
+                <div class="button-block"><button id="emailForm:j_idt946" name="emailForm:j_idt946" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btn btn-default" onclick="PrimeFaces.ab({s:&quot;emailForm:j_idt946&quot;,f:&quot;emailForm&quot;,u:&quot;emailForm&quot;,onco:function(xhr,status,args,data){if (args &amp;&amp; !args.validationFailed) PF('contactForm').hide();;},pa:[{name:&quot;DO_VALIDATION&quot;,value:&quot;true&quot;}],fi:&quot;j_idt918&quot;});return false;" type="submit"><span class="ui-button-text ui-c">Send Message</span></button><script id="emailForm:j_idt946_s" type="text/javascript">$(function(){PrimeFaces.cw("CommandButton","widget_emailForm_j_idt946",{id:"emailForm:j_idt946"});});</script>
+                    <button class="btn btn-link" onclick="PF('contactForm').hide()" type="button">
+                        Cancel
+                    </button>
+                </div><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:10" value="-5888976436540203970:-2421934833401248349" autocomplete="off" />
+</form></div></div></div><script id="contactDialog_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","contactForm",{id:"contactDialog",modal:true});});</script>
+        <script defer="defer" src="/javax.faces.resource/bs/js/bootstrap.min.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1"></script>
+        <script defer="defer" src="/javax.faces.resource/js/ie-compat.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1"></script>
+        <script defer="defer" src="/javax.faces.resource/js/dv_rebind_bootstrap_ui.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1"></script>
+        <script defer="defer" src="/javax.faces.resource/js/owl.carousel.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1"></script>
+        <script defer="defer" src="/javax.faces.resource/js/jquery.matchHeight.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1"></script>
+        <script defer="defer" src="/javax.faces.resource/js/jquery.sharrre.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1"></script>  
+        <script defer="defer" src="/javax.faces.resource/js/clipboard.min.js.xhtml;jsessionid=8d440afad41ceb1c6e8f5372a406?version=5.1.1"></script>
+        <script>
+            //<![CDATA[
+            $(document).ready(function () {
+                // Navbar Search Toggle
+                $(document).on('click', '#navbar-search-toggle', function (e) {
+                    $(this).parent("li").hide();
+                    $("form.navbar-form[role='search']").show();
+                });
+                $('body').click(function (e) {
+                    if (!$(e.target).closest("form.navbar-form[role='search']").length) {
+                        $("form.navbar-form[role='search']").hide();
+                        $("#navbar-search-toggle").parent("li").show();
+                    }
+                    ;
+                });
+
+                // Rebind bootstrap UI components
+                bind_bsui_components();
+            });            
+            function clickSupportLink() {
+                $("[id$='headerSupportLink']").click();
+            }            
+            //]]>
+        </script></body>
+</html>
